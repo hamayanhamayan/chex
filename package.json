@@ -1,0 +1,26 @@
+{
+  "name": "chex",
+  "version": "1.0.0",
+  "description": "a chrome extension for hamayanhamayan",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamayanhamayan/chex.git"
+  },
+  "author": "hamayanhamayan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hamayanhamayan/chex/issues"
+  },
+  "homepage": "https://github.com/hamayanhamayan/chex#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0"
+  }
+}
