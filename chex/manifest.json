@@ -7,17 +7,24 @@
     "activeTab"
   ],
   "background":  {
-    "scripts": ["background.js"],
+    "page": "background.html",
     "persistant": false
   },
   "browser_action": {
       "name": "Copy"
   },
   "commands": {
+    "right-action": {
+      "suggested_key": { 
+        "default": "Ctrl+Right"
+      },
+      "description": "Ctrl+Right"
+    },
     "_execute_browser_action": {
       "suggested_key": {
-        "windows": "Ctrl+Q"
-      }
+        "default": "Ctrl+Q"
+      },
+      "description": "Ri_execute_browser_actionght"
     }
   },
   "manifest_version": 2
