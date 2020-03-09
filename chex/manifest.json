@@ -20,6 +20,12 @@
       },
       "description": "Ctrl+Right"
     },
+    "left-action": {
+      "suggested_key": { 
+        "default": "Ctrl+Left"
+      },
+      "description": "Ctrl+Left"
+    },
     "_execute_browser_action": {
       "suggested_key": {
         "default": "Ctrl+Q"
