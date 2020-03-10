@@ -1,6 +1,7 @@
 let atcoder = /^https:\/\/atcoder\.jp\/contests\/(.+)\/tasks\/(.+)$/;
 let pornhub1 = /^(https:\/\/jp\.pornhub\.com\/(.*)\page=)(.*)$/
 let pornhub2 = /^https:\/\/jp\.pornhub\.com\/(.*)$/
+let pornhub3 = /^https:\/\/jp\.pornhub\.com\/(.*)\?(.*)$/
 
 export function getNextUrl(url) {
     if (atcoder.test(url)) {
@@ -11,7 +12,12 @@ export function getNextUrl(url) {
     }
     if (pornhub2.test(url)) {
         if (!pornhub1.test(url)) {
-            url = url + '?page=2';
+            if (pornhub3.test(url)) {
+                url = url + '&page=2';
+            }
+            else {
+                url = url + '?page=2';
+            }
         } else {
             var res = url.match(pornhub1);
             var prefix = res[1];

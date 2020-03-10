@@ -5,6 +5,7 @@ test('get next url', () => {
   expect(getNextUrl('https://jp.pornhub.com/video')).toBe('https://jp.pornhub.com/video?page=2');
   expect(getNextUrl('https://jp.pornhub.com/video?page=2')).toBe('https://jp.pornhub.com/video?page=3');
   expect(getNextUrl('https://jp.pornhub.com/video?c=111&o=cm&page=3')).toBe('https://jp.pornhub.com/video?c=111&o=cm&page=4');
+  expect(getNextUrl('https://jp.pornhub.com/video?o=ht&cc=jp')).toBe('https://jp.pornhub.com/video?o=ht&cc=jp&page=2');
 });
 
 test('get prev url', () => {
