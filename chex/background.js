@@ -1,7 +1,7 @@
 import { getNextUrl, getPrevUrl } from './urlMaker.js';
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-	console.log('Copy Start')
+	console.log('Ctrl+Q')
     chrome.tabs.executeScript({
 		        code: `
 		            var bgElement = document.createElement('div');
@@ -35,15 +35,15 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.commands.onCommand.addListener(function(command) {
 	console.log('Command Get')
 	if (command == "right-action") {
-		console.log('Right Start')
-		chrome.tabs.query({'active': true}, function(tabs) {
+		console.log('Ctrl+Right')
+		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
 			let cur = tabs[0].url;
 			let next = getNextUrl(cur);
 			if (cur != next) chrome.tabs.update(tabs[0].id, {url: next});
 	  	});
 	} else if (command == "left-action") {
-		console.log('Left Start')
-		chrome.tabs.query({'active': true}, function(tabs) {
+		console.log('Ctrl+Left')
+		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
 			let cur = tabs[0].url;
 			let next = getPrevUrl(cur);
 			if (cur != next) chrome.tabs.update(tabs[0].id, {url: next});
