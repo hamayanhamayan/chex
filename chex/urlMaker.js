@@ -2,6 +2,7 @@ let atcoder = /^https:\/\/atcoder\.jp\/contests\/(.+)\/tasks\/(.+)$/;
 let pornhub1 = /^(https:\/\/jp\.pornhub\.com\/(.*)\page=)(.*)$/
 let pornhub2 = /^https:\/\/jp\.pornhub\.com\/(.*)$/
 let pornhub3 = /^https:\/\/jp\.pornhub\.com\/(.*)\?(.*)$/
+let yukicoder = /^(https:\/\/yukicoder\.me\/problems\/no\/)(.+)$/;
 
 export function getNextUrl(url) {
     if (atcoder.test(url)) {
@@ -25,6 +26,12 @@ export function getNextUrl(url) {
             url = prefix + String(num)
         }
     }
+    if (yukicoder.test(url)) {
+        var res = url.match(yukicoder);
+        var prefix = res[1];
+        var num = parseInt(res[2]) + 1
+        url = prefix + String(num)
+    }
      
     return url;
 }
@@ -42,6 +49,12 @@ export function getPrevUrl(url) {
         var num = parseInt(res[3]) - 1
         if (num == 1) url = prefix.slice(0, -6)
         else url = prefix + String(num)
+    }
+    if (yukicoder.test(url)) {
+        var res = url.match(yukicoder);
+        var prefix = res[1];
+        var num = parseInt(res[2]) - 1
+        url = prefix + String(num)
     }
      
     return url;
