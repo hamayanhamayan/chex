@@ -7,6 +7,8 @@ let yukicoder = /^(https:\/\/yukicoder\.me\/problems\/no\/)(.+)$/;
 let ctftime1 = /^(https:\/\/ctftime\.org\/(.*)\page=)(.*)$/;
 let ctftime2 = /^https:\/\/ctftime\.org\/(.*)$/;
 
+let codeforces = /^https:\/\/codeforces\.com\/contest\/(.+)\/problem\/(.+)$/;
+
 export function getNextUrl(url) {
     if (atcoder.test(url)) {
         var prefix = url.slice(0, -1);
@@ -45,6 +47,12 @@ export function getNextUrl(url) {
         var num = parseInt(res[2]) + 1
         url = prefix + String(num)
     }
+    if (codeforces.test(url)) {
+        var prefix = url.slice(0, -1);
+        var num = url.slice(-1);
+        num = String.fromCharCode(num.charCodeAt(0) + 1)
+        url = prefix + num;
+    }
      
     return url;
 }
@@ -75,6 +83,12 @@ export function getPrevUrl(url) {
         var prefix = res[1];
         var num = parseInt(res[2]) - 1
         url = prefix + String(num)
+    }
+    if (codeforces.test(url)) {
+        var prefix = url.slice(0, -1);
+        var num = url.slice(-1);
+        num = String.fromCharCode(num.charCodeAt(0) - 1)
+        url = prefix + num;
     }
      
     return url;

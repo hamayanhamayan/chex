@@ -12,6 +12,8 @@ test('get next url', () => {
 
   expect(getNextUrl('https://ctftime.org/tasks/')).toBe('https://ctftime.org/tasks/?page=2');
   expect(getNextUrl('https://ctftime.org/tasks/?page=2')).toBe('https://ctftime.org/tasks/?page=3');
+  
+  expect(getNextUrl('https://codeforces.com/contest/1352/problem/A')).toBe('https://codeforces.com/contest/1352/problem/B');
 });
 
 test('get prev url', () => {
@@ -24,4 +26,6 @@ test('get prev url', () => {
 
     expect(getPrevUrl('https://ctftime.org/tasks/?page=3')).toBe('https://ctftime.org/tasks/?page=2');
     expect(getPrevUrl('https://ctftime.org/tasks/?page=2')).toBe('https://ctftime.org/tasks/');
+
+    expect(getPrevUrl('https://codeforces.com/contest/1352/problem/B')).toBe('https://codeforces.com/contest/1352/problem/A');
 });
