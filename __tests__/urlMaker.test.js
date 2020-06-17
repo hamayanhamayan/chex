@@ -14,6 +14,12 @@ test('get next url', () => {
   expect(getNextUrl('https://ctftime.org/tasks/?page=2')).toBe('https://ctftime.org/tasks/?page=3');
   
   expect(getNextUrl('https://codeforces.com/contest/1352/problem/A')).toBe('https://codeforces.com/contest/1352/problem/B');
+
+  expect(getNextUrl('https://example.com/aabbtasks/test')).toBe('https://example.com/aabbtasks/test?page=2');
+  expect(getNextUrl('https://example.com/aabbtasks/test?page=2')).toBe('https://example.com/aabbtasks/test?page=3');
+
+  
+  expect(getNextUrl('https://jp.redtube.com/hot?cc=jp')).toBe('https://jp.redtube.com/hot?cc=jp&page=2');
 });
 
 test('get prev url', () => {
@@ -28,4 +34,8 @@ test('get prev url', () => {
     expect(getPrevUrl('https://ctftime.org/tasks/?page=2')).toBe('https://ctftime.org/tasks/');
 
     expect(getPrevUrl('https://codeforces.com/contest/1352/problem/B')).toBe('https://codeforces.com/contest/1352/problem/A');
+
+    expect(getPrevUrl('https://example.com/aabbtasks/test?page=2')).toBe('https://example.com/aabbtasks/test');
+    expect(getPrevUrl('https://example.com/aabbtasks/test?page=3')).toBe('https://example.com/aabbtasks/test?page=2');
+    expect(getPrevUrl('https://jp.redtube.com/hot?cc=jp&page=2')).toBe('https://jp.redtube.com/hot?cc=jp');
 });

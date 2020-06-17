@@ -9,6 +9,9 @@ let ctftime2 = /^https:\/\/ctftime\.org\/(.*)$/;
 
 let codeforces = /^https:\/\/codeforces\.com\/contest\/(.+)\/problem\/(.+)$/;
 
+let default1 = /^(https:\/\/(.*)\page=)(.*)$/;
+let default2 = /^https:\/\/(.*)\?(.*)$/;
+
 export function getNextUrl(url) {
     if (atcoder.test(url)) {
         var prefix = url.slice(0, -1);
@@ -16,7 +19,7 @@ export function getNextUrl(url) {
         num = String.fromCharCode(num.charCodeAt(0) + 1)
         url = prefix + num;
     }
-    if (pornhub2.test(url)) {
+    else if (pornhub2.test(url)) {
         if (!pornhub1.test(url)) {
             if (pornhub3.test(url)) {
                 url = url + '&page=2';
@@ -31,7 +34,7 @@ export function getNextUrl(url) {
             url = prefix + String(num)
         }
     }
-    if (ctftime2.test(url)) {
+    else if (ctftime2.test(url)) {
         if (!ctftime1.test(url)) {
             url = url + '?page=2';
         } else {
@@ -41,19 +44,33 @@ export function getNextUrl(url) {
             url = prefix + String(num)
         }
     }
-    if (yukicoder.test(url)) {
+    else if (yukicoder.test(url)) {
         var res = url.match(yukicoder);
         var prefix = res[1];
         var num = parseInt(res[2]) + 1
         url = prefix + String(num)
     }
-    if (codeforces.test(url)) {
+    else if (codeforces.test(url)) {
         var prefix = url.slice(0, -1);
         var num = url.slice(-1);
         num = String.fromCharCode(num.charCodeAt(0) + 1)
         url = prefix + num;
     }
-     
+    else {
+        if (!default1.test(url)) {
+            if (default2.test(url)) {
+                url = url + '&page=2';
+            } else {
+                url = url + '?page=2';
+            }
+        } else {
+            var res = url.match(default1);
+            var prefix = res[1];
+            var num = parseInt(res[3]) + 1
+            url = prefix + String(num)
+        }
+    } 
+
     return url;
 }
 
@@ -64,31 +81,38 @@ export function getPrevUrl(url) {
         num = String.fromCharCode(num.charCodeAt(0) - 1)
         url = prefix + num;
     }
-    if (pornhub1.test(url)) {
+    else if (pornhub1.test(url)) {
         var res = url.match(pornhub1);
         var prefix = res[1];
         var num = parseInt(res[3]) - 1
         if (num == 1) url = prefix.slice(0, -6)
         else url = prefix + String(num)
     }
-    if (ctftime1.test(url)) {
+    else if (ctftime1.test(url)) {
         var res = url.match(ctftime1);
         var prefix = res[1];
         var num = parseInt(res[3]) - 1
         if (num == 1) url = prefix.slice(0, -6)
         else url = prefix + String(num)
     }
-    if (yukicoder.test(url)) {
+    else if (yukicoder.test(url)) {
         var res = url.match(yukicoder);
         var prefix = res[1];
         var num = parseInt(res[2]) - 1
         url = prefix + String(num)
     }
-    if (codeforces.test(url)) {
+    else if (codeforces.test(url)) {
         var prefix = url.slice(0, -1);
         var num = url.slice(-1);
         num = String.fromCharCode(num.charCodeAt(0) - 1)
         url = prefix + num;
+    }
+    else {
+        var res = url.match(default1);
+        var prefix = res[1];
+        var num = parseInt(res[3]) - 1
+        if (num == 1) url = prefix.slice(0, -6)
+        else url = prefix + String(num)
     }
      
     return url;
