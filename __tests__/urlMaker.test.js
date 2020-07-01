@@ -20,6 +20,11 @@ test('get next url', () => {
 
   
   expect(getNextUrl('https://jp.redtube.com/hot?cc=jp')).toBe('https://jp.redtube.com/hot?cc=jp&page=2');
+  expect(getNextUrl('https://www.xnxx.com/search/schoolgirl')).toBe('https://www.xnxx.com/search/schoolgirl/2');
+  expect(getNextUrl('https://www.xnxx.com/search/schoolgirl/3')).toBe('https://www.xnxx.com/search/schoolgirl/4');
+
+  expect(getNextUrl('https://www.xvideos.com/?k=jk')).toBe('https://www.xvideos.com/?k=jk&p=2');
+  expect(getNextUrl('https://www.xvideos.com/?k=jk&p=2')).toBe('https://www.xvideos.com/?k=jk&p=3');
 });
 
 test('get prev url', () => {
@@ -38,4 +43,7 @@ test('get prev url', () => {
     expect(getPrevUrl('https://example.com/aabbtasks/test?page=2')).toBe('https://example.com/aabbtasks/test');
     expect(getPrevUrl('https://example.com/aabbtasks/test?page=3')).toBe('https://example.com/aabbtasks/test?page=2');
     expect(getPrevUrl('https://jp.redtube.com/hot?cc=jp&page=2')).toBe('https://jp.redtube.com/hot?cc=jp');
+
+    expect(getPrevUrl('https://www.xnxx.com/search/schoolgirl/4')).toBe('https://www.xnxx.com/search/schoolgirl/3');
+    expect(getPrevUrl('https://www.xvideos.com/?k=jk&p=3')).toBe('https://www.xvideos.com/?k=jk&p=2');
 });

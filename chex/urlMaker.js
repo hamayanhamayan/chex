@@ -9,6 +9,12 @@ let ctftime2 = /^https:\/\/ctftime\.org\/(.*)$/;
 
 let codeforces = /^https:\/\/codeforces\.com\/contest\/(.+)\/problem\/(.+)$/;
 
+let xnxx1 = /^https:\/\/www\.xnxx\.com\/search\/(.+)$/;
+let xnxx2 = /^https:\/\/www\.xnxx\.com\/search\/(.+)\/(.+)$/;
+
+let xv1 = /^https:\/\/www\.xvideos\.com\/(.+)$/;
+let xv2 = /^https:\/\/www\.xvideos\.com\/(.+)\&p=(.+)$/;
+
 let default1 = /^(https:\/\/(.*)\page=)(.*)$/;
 let default2 = /^https:\/\/(.*)\?(.*)$/;
 
@@ -55,6 +61,24 @@ export function getNextUrl(url) {
         var num = url.slice(-1);
         num = String.fromCharCode(num.charCodeAt(0) + 1)
         url = prefix + num;
+    }
+    else if (xnxx1.test(url)) {
+        if(xnxx2.test(url)) {
+            var res = url.match(xnxx2);
+            var prefix = parseInt(res[2]) + 1;
+            url = "https://www.xnxx.com/search/" + res[1] + "/" + String(prefix);
+        } else {
+            url = url + "/2";
+        }
+    }
+    else if (xv1.test(url)) {
+        if(xv2.test(url)) {
+            var res = url.match(xv2);
+            var prefix = parseInt(res[2]) + 1;
+            url = "https://www.xvideos.com/" + res[1] + "&p=" + String(prefix);
+        } else {
+            url = url + "&p=2";
+        }
     }
     else {
         if (!default1.test(url)) {
@@ -106,6 +130,18 @@ export function getPrevUrl(url) {
         var num = url.slice(-1);
         num = String.fromCharCode(num.charCodeAt(0) - 1)
         url = prefix + num;
+    }
+    else if (xnxx2.test(url)) {
+        var res = url.match(xnxx2);
+        var prefix = res[1];
+        var num = parseInt(res[2]) - 1;
+        url = "https://www.xnxx.com/search/" + res[1] + "/" + String(num);
+    }
+    else if (xv2.test(url)) {
+        var res = url.match(xv2);
+        var prefix = res[1];
+        var num = parseInt(res[2]) - 1;
+        url = "https://www.xvideos.com/" + res[1] + "&p=" + String(num);
     }
     else {
         var res = url.match(default1);
